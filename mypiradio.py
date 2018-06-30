@@ -104,14 +104,17 @@ class radioplayer:
 
 	def play_from_soyuz(self, url_prefix):
 		today = date.today()
-		pageurl = '{0}-{1}-{2}-{3}'.format(
-			url_prefix, today.strftime("%-d"), months[today.month - 1], today.strftime("%Y"))
-		html = urllib2.urlopen(pageurl).read()
-		r = re.compile(r"http:.+[.]mp3")
-		r_result = r.search(html)
-		if r_result is not None:
-			self._list = [r_result.group().replace(' ', '%20')]
-			self.play_list()		
+		url_suffices = ('', 'g')
+		for url_suffix in url_suffices:
+			pageurl = '{0}-{1}-{2}-{3}{4}'.format(
+				url_prefix, today.strftime("%-d"), months[today.month - 1], today.strftime("%Y"), url_suffix)
+			html = urllib2.urlopen(pageurl).read()
+			r = re.compile(r"http:.+[.]mp3")
+			r_result = r.search(html)
+			if r_result is not None:
+				self._list = [r_result.group().replace(' ', '%20')]
+				self.play_list()
+				break
 
 	def play_apostol(self):
 		self.play_from_soyuz('http://tv-soyuz.ru/peredachi/chitaem-apostol')
