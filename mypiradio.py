@@ -4,13 +4,14 @@
 from datetime import date
 import re
 import urllib2
+from bs4 import BeautifulSoup
 import psycopg2
 import lirc
 import vlc
 from subprocess import call
 import os
 
-months = ['yanvarya', 'fevralya', 'marta', 'aprelya', 'maya', 'iyunya', 'iyulya', 'avgusta', 'sentyabrya', 'oktyabrya', 'noyabrya', 'dekabrya']
+soyuz_root = 'http://tv-soyuz.ru'
 dir_root = '/mnt/onetouch/audio'
 url_room = 'http://192.168.0.110:8000/stream.mp3'
 
@@ -103,27 +104,28 @@ class radioplayer:
 		self.play_list()
 
 	def play_from_soyuz(self, url_prefix):
-		today = date.today()
-		url_suffices = ('', 'g')
-		for url_suffix in url_suffices:
-			pageurl = '{0}-{1}-{2}-{3}{4}'.format(
-				url_prefix, today.strftime("%-d"), months[today.month - 1], today.strftime("%Y"), url_suffix)
-			html = urllib2.urlopen(pageurl).read()
-			r = re.compile(r"http:.+[.]mp3")
-			r_result = r.search(html)
-			if r_result is not None:
-				self._list = [r_result.group().replace(' ', '%20')]
-				self.play_list()
-				break
+		html_root = urllib2.urlopen(soyuz_root + url_prefix).read()
+		if html_root is not None:
+			htmlroot_obj = BeautifulSoup(html_root, "html.parser")
+			htmldates_obj = htmlroot_obj.find_all("div", {"class":"program-guide__anons"})
+			if htmldates_obj:
+				htmlcurrdate_obj = htmldates_obj[0]
+				pageurl = soyuz_root + htmlcurrdate_obj.find("a").get("href")
+				html = urllib2.urlopen(pageurl).read()
+				r = re.compile(r"http:.+[.]mp3")
+				r_result = r.search(html)
+				if r_result is not None:
+					self._list = [r_result.group().replace(' ', '%20')]
+					self.play_list()
 
 	def play_apostol(self):
-		self.play_from_soyuz('http://tv-soyuz.ru/peredachi/chitaem-apostol')
+		self.play_from_soyuz('/Chitaem-Apostol')
 
 	def play_evangelie(self):
-		self.play_from_soyuz('http://tv-soyuz.ru/peredachi/chitaem-evangelie-vmeste-s-tserkovyu')
+		self.play_from_soyuz('/peredachi/chitaem-evangelie-vmeste-s-tserkovyu')
 
 	def play_calendar(self):
-		self.play_from_soyuz('http://tv-soyuz.ru/peredachi/tserkovnyy-kalendar')
+		self.play_from_soyuz('/peredachi/tserkovnyy-kalendar-propoved-na-kazhdyy-den')
 
 	def setstation(self, station):
 		self._cur.execute("select name from public.radio_stations where code = %s", (station,))
