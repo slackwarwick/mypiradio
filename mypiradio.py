@@ -118,15 +118,6 @@ class radioplayer:
 					self._list = [r_result.group().replace(' ', '%20')]
 					self.play_list()
 
-	def play_apostol(self):
-		self.play_from_soyuz('/Chitaem-Apostol')
-
-	def play_evangelie(self):
-		self.play_from_soyuz('/peredachi/chitaem-evangelie-vmeste-s-tserkovyu')
-
-	def play_calendar(self):
-		self.play_from_soyuz('/peredachi/tserkovnyy-kalendar-propoved-na-kazhdyy-den')
-
 	def setstation(self, station):
 		self._cur.execute("select name from public.radio_stations where code = %s", (station,))
 		stationname = self._cur.fetchone()
@@ -193,11 +184,15 @@ def changeradio():
 		#elif code == "poweroff":
 			#call("sudo poweroff", shell=True)
 		elif code == "apostol":
-			player.play_apostol()
+			player.play_from_soyuz('/Chitaem-Apostol')
 		elif code == "evangelie":
-			player.play_evangelie()
+			player.play_from_soyuz('/peredachi/chitaem-evangelie-vmeste-s-tserkovyu')
 		elif code == "calendar":
-			player.play_calendar()
+			player.play_from_soyuz('/peredachi/tserkovnyy-kalendar-propoved-na-kazhdyy-den')
+		elif code == "todayinfo":
+			player.play_from_soyuz('/Etot-den-v-istorii')
+		elif code == "orthead":
+			player.play_from_soyuz('/Pravoslavnyy-na-vsyu-golovu')
 		elif code in ("green","red","blue","yellow","book"):
 			player.play_from_dir(code)
 		elif code == "up":
