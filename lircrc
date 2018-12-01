@@ -1,0 +1,169 @@
+begin
+	remote = oriel
+	button = KEY_OK
+	prog = irexec
+	config = echo "This is OK"
+end
+begin
+        remote = oriel
+        button = KEY_POWER
+        prog = mypiradio
+        config = poweroff
+end
+begin
+        remote = oriel
+        button = KEY_EXIT
+        prog = mypiradio
+        config = stop
+end
+begin
+	remote = oriel
+	button = KEY_1
+	prog = mypiradio
+	config = detskoe
+end
+begin
+        remote = oriel
+        button = KEY_2
+        prog = mypiradio
+        config = blagovestie
+end
+begin
+        remote = oriel
+        button = KEY_3
+        prog = mypiradio
+        config = bereg
+end
+begin
+        remote = oriel
+        button = KEY_4
+        prog = mypiradio
+        config = kultura
+end
+begin
+        remote = oriel
+        button = KEY_5
+        prog = mypiradio
+        config = relax
+end
+begin
+        remote = oriel
+        button = KEY_6
+        prog = mypiradio
+        config = orfei
+end
+begin
+        remote = oriel
+        button = KEY_7
+        prog = mypiradio
+        config = nashe
+end
+begin
+        remote = oriel
+        button = KEY_8
+        prog = mypiradio
+        config = folk
+end
+begin
+	remote = oriel
+	button = KEY_9
+	prog = mypiradio
+	config = bard
+end
+begin
+	remote = oriel
+	button = KEY_INFO
+	prog = mypiradio
+	config = apostol
+end
+begin
+	remote = oriel
+	button = KEY_BACK
+	prog = mypiradio
+	config = evangelie
+end
+begin
+	remote = oriel
+	button = KEY_0
+	prog = mypiradio
+	config = calendar
+end
+begin
+	remote = oriel
+	button = KEY_TEXT
+	prog = mypiradio
+	config = todayinfo
+end
+begin
+	remote = oriel
+	button = KEY_RADIO
+	prog = mypiradio
+	config = orthead
+end
+begin
+	remote = oriel
+	button = KEY_SUBTITLE
+	prog = mypiradio
+	config = room
+end
+begin
+	remote = oriel
+	button = KEY_EPG
+	prog = mypiradio
+	config = book
+end
+begin
+	remote = oriel
+	button = KEY_PAUSE
+	prog = mypiradio
+	config = pause
+end
+begin
+	remote = oriel
+	button = KEY_STOP
+	prog = mypiradio
+	config = green
+end
+begin
+	remote = oriel
+	button = KEY_PLAY
+	prog = mypiradio
+	config = yellow
+end
+begin
+	remote = oriel
+	button = KEY_REWIND
+	prog = mypiradio
+	config = red
+end
+begin
+	remote = oriel
+	button = KEY_FORWARD
+	prog = mypiradio
+	config = blue
+end
+begin
+	remote = oriel
+	button = KEY_UP
+	prog = mypiradio
+	config = up
+end
+begin
+	remote = oriel
+	button = KEY_RIGHT
+	prog = mypiradio
+	config = right
+end
+begin
+	remote = oriel
+	button = KEY_DOWN
+	prog = mypiradio
+	config = down
+end
+begin
+	remote = oriel
+	button = KEY_LEFT
+	prog = mypiradio
+	config = left
+end
+
